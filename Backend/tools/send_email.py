@@ -5,6 +5,7 @@ Usa APP_PASSWORD_GMAIL para autenticación.
 
 import os
 import smtplib
+import socket # nuevo
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -43,6 +44,23 @@ def send_email(recipient_email: str, subject: str, body: str) -> str:
     msg.attach(MIMEText(body, "plain", "utf-8"))
 
     try:
+        # ✅ Forzar IPv4
+        smtp_host = socket.gethostbyname("smtp.gmail.com")
+
+        with smtplib.SMTP(smtp_host, 587, timeout=30) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+            server.login(sender_email, app_password)
+            server.sendmail(sender_email, recipient_email, msg.as_string())
+
+        return f"Email enviado exitosamente a {recipient_email}"
+
+    except Exception as e:
+        return f"Error al enviar email: {str(e)}"
+
+    '''
+    try:
         with smtplib.SMTP("smtp.gmail.com", 587) as server:
             server.starttls()
             server.login(sender_email, app_password)
@@ -50,3 +68,4 @@ def send_email(recipient_email: str, subject: str, body: str) -> str:
         return f"Email enviado exitosamente a {recipient_email}"
     except Exception as e:
         return f"Error al enviar email: {str(e)}"
+    '''
