@@ -3,7 +3,8 @@ import { Sidebar } from "@/components/Sidebar";
 import { RightPanel } from "@/components/RightPanel";
 import { ScraperView } from "@/components/ScraperView";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE =
+  import.meta.env.VITE_API_BASE?.trim() || "http://localhost:8000";
 
 interface ProcessResult {
   final_email: string;

@@ -10,7 +10,7 @@ load_dotenv()  # Carga .env antes de importar el grafo/agentes
 import logging
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -32,6 +32,7 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://127.0.0.1:5173",
         "https://v0-web-scraper-interface-gamma.vercel.app",
+        "https://project-lang-graph-multiagente-scra.vercel.app"
     ],
     allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
