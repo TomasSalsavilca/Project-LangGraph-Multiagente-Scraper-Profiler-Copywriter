@@ -1,0 +1,44 @@
+# Secretos y entorno local (usar variables en el host / orquestador)
+.env
+.env.*
+!.env.example
+
+# Salidas de ejecución del pipeline (grandes, innecesarias en la imagen)
+Salidas de los Agentes/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+
+# Herramientas / tests locales
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Git y editor
+.git/
+.gitignore
+.gitattributes
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs y temporales
+*.log
+tmp/
+temp/
+
+# La imagen no necesita el propio Dockerfile dentro de /app
+Dockerfile
+.dockerignore
